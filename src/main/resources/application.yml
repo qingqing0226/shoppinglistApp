@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://mongo:mongo@shoppinglistcluster.noe4trd.mongodb.net/ShoppingListDB # connection string
+      database: ShoppingListDB #databasenamee
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+debug: true
