@@ -20,6 +20,7 @@ public class ShoppingList {
     @Field("total_price")
     private BigDecimal totalPrice;
     private List<Product> items;
+    private boolean completed;
 
     public ShoppingList () {}
 
@@ -69,5 +70,19 @@ public class ShoppingList {
 
     public void setItems(List<Product> items) {
         this.items = items;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public BigDecimal computeTotalPrice() {
+        return items.stream()
+                .map(item -> item.getPrice().multiply(new BigDecimal(item.getQuantity())))
+                .reduce(new BigDecimal(0), (partial, next) -> partial.add(next));
     }
 }
