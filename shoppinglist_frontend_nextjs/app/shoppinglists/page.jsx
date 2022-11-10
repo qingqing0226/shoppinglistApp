@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import '../../styles/shoppinglists.css';
 
 const getData = async () => {
   const data = await fetch('http://localhost:8080/api/shoppinglists');
@@ -9,11 +10,11 @@ const getData = async () => {
 const List = async () => {
   const data = await getData();
   return (
-    <div>
-      <ul>
-        {data.map(shoplist => <li key={shoplist.id}><Link href={'shoppinglists/' + shoplist.id}>{shoplist.title}, created at {shoplist.createdDate}, SEK {shoplist.totalPrice}</Link></li>)}
-      </ul>
-    </div>
+    <section className="list--container">
+      <div className="list">
+        {data.map(shoplist => <Link href={'shoppinglists/' + shoplist.id} key={shoplist.id} className="row">{shoplist.title} {shoplist.createdDate} SEK {shoplist.totalPrice}</Link>)}
+      </div>
+    </section>
   )
 }
 

@@ -3,10 +3,10 @@ import Link from 'next/link';
 
 const Home = () => {
   return (
-    <div>
-      <Link href={'/shoppinglists'}>View All</Link><br />
-      <Link href={'/create'}>Create a Shoppinglist</Link>
-    </div>
+    <section className="home">
+      <Link href={'/shoppinglists'} className="home--links" >View All</Link><br />
+      <Link href={'/create'} className="home--links">Create a Shopping List</Link>
+    </section>
   )
 }
 

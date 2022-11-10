@@ -9,7 +9,7 @@ const getData = async (id) => {
 const ShoppingList = async ({ params }) => {
   const shoppinglist = await getData(params.id);
   return (
-    <article>
+    <article className="card">
       <h3><Link href={'/shoppinglists/' + params.id + '/Edit'}>Edit</Link></h3>
       <h2>{shoppinglist.title}</h2>
       <p>Created at: {shoppinglist.createdDate}</p>

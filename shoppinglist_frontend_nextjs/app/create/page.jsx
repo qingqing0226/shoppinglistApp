@@ -1,15 +1,17 @@
 'use client'
 import { React, useRef, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 
 const CreateForm = () => {
   const [add, setAdd] = useState(false);
   const [total, setTotal] = useState(0);
+  const [items, setItems] = useState([]);
   const titleRef = useRef();
   const itemTitle = useRef();
   const itemQuan = useRef();
   const itemPrice = useRef();
-  const [items, setItems] = useState([]);
+  const router = useRouter();
 
   const addItem = () => {
     const copy = [...items];
@@ -18,6 +20,11 @@ const CreateForm = () => {
     itemTitle.current.value = null;
     itemQuan.current.value = null;
     itemPrice.current.value = null;
+  }
+
+  const removeItem = (title) => {
+    const copy = [...items];
+    setItems(copy.filter(item => item.title !== title));
   }
 
   useEffect(() => {
@@ -40,7 +47,8 @@ const CreateForm = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data)
-    }).then(res => console.log(res));
+    }).then(res => res.json());
+    router.refresh();
   };
 
   return (
@@ -50,9 +58,9 @@ const CreateForm = () => {
           <legend>Create a shopping list</legend>
           <div>Total price: {total} SEK</div>
           {(items) && (
-            items.map(item => <div key={item.title}>{item.title} {item.quantity}x{item.price}</div>)
+            items.map(item => <div key={item.title}>{item.title} {item.quantity}x{item.price} <button type='button' onClick={(e) => { e.stopPropagation(); removeItem(item.title); }}>Remove</button></div>)
           )}
-          <div><input ref={titleRef} placeholder="Enter list title" /></div>
+          <div>Title: <input ref={titleRef} placeholder="Enter list title" /></div>
           {(!add) && (
             <button type='button' onClick={(e) => { e.stopPropagation(); setAdd(true) }}>Add Item</button>
           )}
@@ -68,8 +76,9 @@ const CreateForm = () => {
             <button type="submit" >Submit</button>
           )}
         </fieldset>
+        <div style={{ display: 'none' }} className="text--list-saved">The shopping list has been saved!</div>
       </form>
-    </article>
+    </article >
   )
 }
 

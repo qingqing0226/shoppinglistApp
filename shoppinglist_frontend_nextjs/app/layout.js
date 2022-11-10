@@ -1,4 +1,5 @@
 import Link from "next/link";
+import '../styles/styles.css';
 
 export default function RootLayout({ children }) {
   return (
@@ -6,13 +7,12 @@ export default function RootLayout({ children }) {
       <head>
         <title>My Shopping List</title>
       </head>
-      <body>
-        <header>
-          <h1>My Shopping List</h1>
-          <h3><Link href={'/'}>Back Home</Link></h3>
+      <body className="container">
+        <header className="root--header">
+          <h1 className="root--title">My Shopping List</h1>
+          <h3 className="root--link-home"><Link href={'/'} >Home</Link></h3>
         </header>
         {children}
-
       </body>
     </html>
   )
