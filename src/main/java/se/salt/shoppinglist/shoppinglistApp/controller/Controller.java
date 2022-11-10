@@ -1,14 +1,14 @@
 package se.salt.shoppinglist.shoppinglistApp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import se.salt.shoppinglist.shoppinglistApp.model.ShoppingList;
 import se.salt.shoppinglist.shoppinglistApp.service.ShoppingListService;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -21,5 +21,21 @@ public class Controller {
     @GetMapping(path = "shoppinglists")
     ResponseEntity<List<ShoppingList>> getAllShoppinglists() {
         return  ResponseEntity.ok(service. getAllShoppinglists());
+    }
+
+    @GetMapping(path = "shoppinglists/{id}")
+    ResponseEntity getShoppinglistById(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(service.getShoppinglistById(id));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Shopping list cannot be found");
+        }
+
+    }
+
+    @PostMapping (path = "shoppinglists")
+    ResponseEntity<ShoppingList> createShoppinglist(@RequestBody ShoppingList shoppingList) {
+        ShoppingList created = service.createShoppinglist(shoppingList);
+        return  ResponseEntity.created(URI.create("/api/shoppinglists/" + shoppingList.getId())).body(created);
     }
 }

@@ -1,8 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <Link href={'/shoppinglists'}>View All</Link><br />
+      <Link href={'/shoppinglists'}>Create a Shoppinglist</Link>
+    </div>
   )
 }
 

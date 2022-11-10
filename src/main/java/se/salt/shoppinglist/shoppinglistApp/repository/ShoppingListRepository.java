@@ -14,4 +14,12 @@ public class ShoppingListRepository {
     public List<ShoppingList> getAllShoppinglists() {
         return jpaRepo.findAll();
     }
+
+    public ShoppingList createdShoppinglist(ShoppingList shoppingList) {
+        return jpaRepo.save(shoppingList);
+    }
+
+    public ShoppingList findShoppinglistById(String id) {
+        return jpaRepo.findById(id).orElseThrow();
+    }
 }

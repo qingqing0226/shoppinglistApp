@@ -15,9 +15,7 @@ public class ShoppingList {
     @MongoId(value = FieldType.OBJECT_ID)
     private String id;
     private String title;
-    @Field("created_date")
     private String createdDate;
-    @Field("total_price")
     private BigDecimal totalPrice;
     private List<Product> items;
     private boolean completed;

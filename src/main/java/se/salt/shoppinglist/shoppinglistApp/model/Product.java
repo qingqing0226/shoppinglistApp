@@ -1,5 +1,9 @@
 package se.salt.shoppinglist.shoppinglistApp.model;
 
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import javax.persistence.Id;
 import java.math.BigDecimal;
 
 public class Product {

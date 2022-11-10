@@ -15,4 +15,12 @@ public class ShoppingListService {
     public List<ShoppingList> getAllShoppinglists() {
         return repo.getAllShoppinglists();
     }
+
+    public ShoppingList createShoppinglist(ShoppingList shoppingList) {
+        return repo.createdShoppinglist(shoppingList);
+    }
+
+    public ShoppingList getShoppinglistById(String id) {
+        return repo.findShoppinglistById(id);
+    }
 }
