@@ -11,7 +11,7 @@ const List = async () => {
   return (
     <div>
       <ul>
-        {data.map(shoplist => <li key={shoplist.id}><Link href={'shoppinglists/' + shoplist.id}>title {shoplist.title}, created at {shoplist.createdDate}, SEK {shoplist.totalPrice}</Link></li>)}
+        {data.map(shoplist => <li key={shoplist.id}><Link href={'shoppinglists/' + shoplist.id}>{shoplist.title}, created at {shoplist.createdDate}, SEK {shoplist.totalPrice}</Link></li>)}
       </ul>
     </div>
   )
