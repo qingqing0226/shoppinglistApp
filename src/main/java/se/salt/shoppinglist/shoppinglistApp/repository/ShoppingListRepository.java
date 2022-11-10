@@ -22,4 +22,8 @@ public class ShoppingListRepository {
     public ShoppingList findShoppinglistById(String id) {
         return jpaRepo.findById(id).orElseThrow();
     }
+
+    public void deleteShoppinglistById(String id) {
+        jpaRepo.deleteById(id);
+    }
 }

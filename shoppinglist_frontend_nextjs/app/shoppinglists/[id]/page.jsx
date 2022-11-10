@@ -6,11 +6,15 @@ const getData = async (id) => {
   return data.json();
 }
 
+
 const ShoppingList = async ({ params }) => {
   const shoppinglist = await getData(params.id);
   return (
     <article className="card">
-      <h3><Link href={'/shoppinglists/' + params.id + '/Edit'}>Edit</Link></h3>
+      <div className="links-container">
+        <Link href={'/shoppinglists/' + params.id + '/Edit'} className="links">Edit</Link>
+        <Link href={'/shoppinglists/' + params.id + '/Delete'} className="links">Delete</Link>
+      </div>
       <h2>{shoppinglist.title}</h2>
       <p>Created at: {shoppinglist.createdDate}</p>
       <p>Total price: {shoppinglist.totalPrice} SEK</p>

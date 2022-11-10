@@ -38,4 +38,10 @@ public class Controller {
         ShoppingList created = service.createShoppinglist(shoppingList);
         return  ResponseEntity.created(URI.create("/api/shoppinglists/" + shoppingList.getId())).body(created);
     }
+
+    @DeleteMapping(path = "shoppinglists/{id}")
+    ResponseEntity deleteShoppinglist(@PathVariable String id) {
+        service.deleteShoppinglist(id);
+        return ResponseEntity.noContent().build();
+    }
 }

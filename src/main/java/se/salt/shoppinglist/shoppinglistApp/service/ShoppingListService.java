@@ -23,4 +23,8 @@ public class ShoppingListService {
     public ShoppingList getShoppinglistById(String id) {
         return repo.findShoppinglistById(id);
     }
+
+    public void deleteShoppinglist(String id) {
+        repo.deleteShoppinglistById(id);
+    }
 }
