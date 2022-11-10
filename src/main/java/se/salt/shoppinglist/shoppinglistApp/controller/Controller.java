@@ -44,4 +44,9 @@ public class Controller {
         service.deleteShoppinglist(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping(path = "shoppinglists/{id}")
+    ResponseEntity<ShoppingList> updateShoppinglist(@PathVariable String id) {
+        return ResponseEntity.ok(service.updateShoppinglistById(id));
+    }
 }

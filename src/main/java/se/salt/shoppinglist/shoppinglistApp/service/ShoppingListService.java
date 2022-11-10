@@ -27,4 +27,10 @@ public class ShoppingListService {
     public void deleteShoppinglist(String id) {
         repo.deleteShoppinglistById(id);
     }
+
+    public ShoppingList updateShoppinglistById(String id) {
+        ShoppingList shoppingList = repo.findShoppinglistById(id);
+        shoppingList.setCompleted(!shoppingList.isCompleted());
+        return repo.updateShoppinglist(shoppingList);
+    }
 }

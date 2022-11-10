@@ -26,4 +26,8 @@ public class ShoppingListRepository {
     public void deleteShoppinglistById(String id) {
         jpaRepo.deleteById(id);
     }
+
+    public ShoppingList updateShoppinglist(ShoppingList shoppingList) {
+        return jpaRepo.save(shoppingList);
+    }
 }
