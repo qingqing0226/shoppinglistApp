@@ -1,17 +1,17 @@
 'use client'
 import { React, useRef, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import '../../styles/CreateForm.css';
 
 
 const CreateForm = () => {
   const [add, setAdd] = useState(false);
   const [total, setTotal] = useState(0);
   const [items, setItems] = useState([]);
-  const titleRef = useRef();
-  const itemTitle = useRef();
-  const itemQuan = useRef();
-  const itemPrice = useRef();
-  const router = useRouter();
+  const [submit, setSubmit] = useState(false);
+  const titleRef = useRef('');
+  const itemTitle = useRef('');
+  const itemQuan = useRef('');
+  const itemPrice = useRef('');
 
   const addItem = () => {
     const copy = [...items];
@@ -33,6 +33,7 @@ const CreateForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (titleRef.current.value === '' || items.length === 0) return;
     const data = {
       title: titleRef.current.value,
       createdDate: new Date().toLocaleDateString(),
@@ -48,35 +49,37 @@ const CreateForm = () => {
       },
       body: JSON.stringify(data)
     }).then(res => res.json());
-    router.refresh();
+    setSubmit(true);
   };
 
   return (
-    <article>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <fieldset>
-          <legend>Create a shopping list</legend>
-          <div>Total price: {total} SEK</div>
+    <article className="form-container">
+      <form onSubmit={(e) => handleSubmit(e)} className="form">
+        <fieldset className="form-fieldset">
+          <legend className="form-legend">Create a Shopping List</legend>
+          <div className="title-container">Title: <input className="title-input" ref={titleRef} placeholder="Enter list title" /></div>
+          <div className="totalPrice">Total Price: {total} SEK</div>
           {(items) && (
-            items.map(item => <div key={item.title}>{item.title} {item.quantity}x{item.price} <button type='button' onClick={(e) => { e.stopPropagation(); removeItem(item.title); }}>Remove</button></div>)
+            items.map((item, index) => <div className="item-info" key={index}>{item.title} {item.quantity}x{item.price} <button className="button-remove button" type='button' onClick={(e) => { e.stopPropagation(); removeItem(item.title); }}>Remove Item</button></div>)
           )}
-          <div>Title: <input ref={titleRef} placeholder="Enter list title" /></div>
           {(!add) && (
-            <button type='button' onClick={(e) => { e.stopPropagation(); setAdd(true) }}>Add Item</button>
+            <button className="button-addItem button" type='button' onClick={(e) => { e.stopPropagation(); setAdd(true) }}>Add Item</button>
           )}
           {(add) && (
-            <div>
-              <input ref={itemTitle} placeholder="Enter item name" />
-              <input ref={itemQuan} placeholder="Enter item quantity" />
-              <input ref={itemPrice} placeholder="Enter item price" />
-              <button type='button' onClick={(e) => { e.stopPropagation(); addItem(); setAdd(false) }}>Done</button>
+            <div className="addFields">
+              <input className="field" ref={itemTitle} placeholder="Enter item name" />
+              <input className="field" ref={itemQuan} placeholder="Enter item quantity" />
+              <input className="field" ref={itemPrice} placeholder="Enter item price" />
+              <button className="button-add button" type='button' onClick={(e) => { e.stopPropagation(); addItem(); setAdd(false) }}>Add</button>
             </div>
           )}
           {(!add) && (
-            <button type="submit" >Submit</button>
+            <button className="button-submit button" type="submit" >Submit</button>
           )}
         </fieldset>
-        <div style={{ display: 'none' }} className="text--list-saved">The shopping list has been saved!</div>
+        {(submit) && (
+          <div className="text--list-saved">The shopping list has been saved!</div>
+        )}
       </form>
     </article >
   )

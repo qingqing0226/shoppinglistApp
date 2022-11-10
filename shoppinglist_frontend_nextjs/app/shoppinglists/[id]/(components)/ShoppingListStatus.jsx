@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import './toggle.css';
 
 const ShoppingListStatus = ({ id }) => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const ShoppingListStatus = ({ id }) => {
     e.preventDefault();
   };
   return (
-    <button type="button" onClick={handleToggle}>Toggle</button>
+    <button type="button" onClick={handleToggle} className="button-toggle">Toggle</button>
   )
 }
 
