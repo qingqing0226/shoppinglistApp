@@ -17,7 +17,7 @@ const CreateForm = () => {
     setItems(copy);
     itemTitle.current.value = null;
     itemQuan.current.value = null;
-    itemPrice.current.value = null
+    itemPrice.current.value = null;
   }
 
   useEffect(() => {
@@ -28,11 +28,11 @@ const CreateForm = () => {
     e.preventDefault();
     const data = {
       title: titleRef.current.value,
-      createdDate: '2022-11-12',
+      createdDate: new Date().toLocaleDateString(),
       totalPrice: total,
       completed: false,
       items: items
-    }
+    };
     fetch(`http://localhost:8080/api/shoppinglists`, {
       method: 'POST',
       mode: 'cors',
@@ -49,17 +49,24 @@ const CreateForm = () => {
         <fieldset>
           <legend>Create a shopping list</legend>
           <div>Total price: {total} SEK</div>
-          <div><input ref={titleRef} placeholder="enter a title for the shopping list" /></div>
-          <button type='button' onClick={(e) => { e.stopPropagation(); setAdd(true) }}>Add Item</button>
+          {(items) && (
+            items.map(item => <div key={item.title}>{item.title} {item.quantity}x{item.price}</div>)
+          )}
+          <div><input ref={titleRef} placeholder="Enter list title" /></div>
+          {(!add) && (
+            <button type='button' onClick={(e) => { e.stopPropagation(); setAdd(true) }}>Add Item</button>
+          )}
           {(add) && (
             <div>
-              <input ref={itemTitle} placeholder="enter item name here" />
-              <input ref={itemQuan} placeholder="enter item quantity here" />
-              <input ref={itemPrice} placeholder="enter item price here" />
+              <input ref={itemTitle} placeholder="Enter item name" />
+              <input ref={itemQuan} placeholder="Enter item quantity" />
+              <input ref={itemPrice} placeholder="Enter item price" />
               <button type='button' onClick={(e) => { e.stopPropagation(); addItem(); setAdd(false) }}>Done</button>
             </div>
           )}
-          <button type="submit" >Submit</button>
+          {(!add) && (
+            <button type="submit" >Submit</button>
+          )}
         </fieldset>
       </form>
     </article>
