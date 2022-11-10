@@ -31,6 +31,7 @@
 }
 
 .item-info {
+  width: 88vw;
   background-color: #CEE5D0;
   text-align: center;
   border: #94B49F solid 1px;
@@ -56,7 +57,7 @@
   font-size: 1.5rem;
   cursor: pointer;
   border: none;
-  background-color:#94B49F;
+  background-color:#B5CDA3;
 }
 
 .button:hover {
@@ -76,13 +77,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: none;
 }
 
 .field {
   width: 88vw;
-  height: 1.6rem;
+  height: 1.8rem;
   border-radius: 10px;
   padding-left: 0.5rem;
   font-size: 1.5rem;
-  margin: 0.5rem 0;
+  margin: 0.2rem 0;
+  border: #B5CDA3 solid 1px;
 }

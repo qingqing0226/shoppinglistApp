@@ -12,7 +12,7 @@ const List = async () => {
   return (
     <section className="list--container">
       <div className="list">
-        {data.map(shoplist => <Link href={'shoppinglists/' + shoplist.id} key={shoplist.id} className="row">{shoplist.title} {shoplist.createdDate} SEK {shoplist.totalPrice}</Link>)}
+        {data.map(shoplist => <Link href={'shoppinglists/' + shoplist.id} key={shoplist.id} className="row">{shoplist.title.toUpperCase()} {'(' + shoplist.createdDate + ')'}</Link>)}
       </div>
     </section>
   )

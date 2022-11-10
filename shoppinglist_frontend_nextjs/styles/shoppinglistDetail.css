@@ -1,3 +1,7 @@
+* {
+  background-color:#FAEBE0;
+}
+
 .card {
   width: 90vw;
 }
@@ -36,23 +40,21 @@
   padding: 0.2rem;
 }
 
-.date {
-
-}
-
-.totalPrice {
-
-}
-
-.status {
-
-}
-.items {
-
-}
 .summary {
-
+  border-radius: 10px;
+  margin-bottom: 0.3rem;
 }
-.row {
+.summary:hover {
+  box-shadow: 0 0 10px rgba(32,32,32,.2);
+  cursor: pointer;
+}
 
+.items {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+
+.row {
+  margin-bottom: 0.5rem;
 }
