@@ -27,7 +27,7 @@ const ShoppingList = async ({ params }) => {
         </div>
         <details className="items detail">
           <summary className="summary">Items</summary>
-          {shoppinglist.items.map(item => <div className="row" key={item.title}>product: {item.title} quantity: {item.quantity} price: {item.price}</div>)}
+          {shoppinglist.items.map(item => <div className="itemrow" key={item.title}>product: {item.title} quantity: {item.quantity} price: {item.price}</div>)}
         </details>
       </div>
     </article>
