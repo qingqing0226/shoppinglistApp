@@ -33,6 +33,12 @@ public class Controller {
 
     }
 
+    @GetMapping(path = "shoppinglists/latest")
+    ResponseEntity getLatestShoppinglist() {
+        return ResponseEntity.ok(service.getLatest());
+
+    }
+
     @PostMapping (path = "shoppinglists")
     ResponseEntity<ShoppingList> createShoppinglist(@RequestBody ShoppingList shoppingList) {
         ShoppingList created = service.createShoppinglist(shoppingList);
@@ -49,4 +55,10 @@ public class Controller {
     ResponseEntity<ShoppingList> updateShoppinglist(@PathVariable String id) {
         return ResponseEntity.ok(service.updateShoppinglistById(id));
     }
+
+    @PutMapping(path = "shoppinglists/edit/{id}")
+    ResponseEntity<ShoppingList> editShoppinglist(@RequestBody ShoppingList shoppingList) {
+        return ResponseEntity.ok(service.createShoppinglist(shoppingList));
+    }
+
 }

@@ -33,4 +33,14 @@ public class ShoppingListService {
         shoppingList.setCompleted(!shoppingList.isCompleted());
         return repo.updateShoppinglist(shoppingList);
     }
+
+    public ShoppingList getLatest() {
+        List<ShoppingList> lists = getAllShoppinglists();
+        if(lists.isEmpty()) {
+            return null;
+        }
+        return lists.stream()
+                .reduce((a, b) -> a.getCreatedDate().compareTo(b.getCreatedDate()) > 0 ? a : b)
+                .get();
+    }
 }

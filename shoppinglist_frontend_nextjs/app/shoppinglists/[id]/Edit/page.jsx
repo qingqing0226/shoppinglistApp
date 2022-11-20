@@ -1,10 +1,14 @@
 'use client'
 import { React, useRef, useState, useEffect } from 'react';
+import EditForm from '../(components)/EditForm';
+import '../../../../styles/EditForm.css';
 
-
-const EditForm = ({ params }) => {
+const EditFormPage = ({ params }) => {
   const [data, setData] = useState(null)
   const [isLoading, setLoading] = useState(false)
+  const titleRef = useRef('');
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     setLoading(true)
     fetch('http://localhost:8080/api/shoppinglists/' + params.id)
@@ -12,44 +16,34 @@ const EditForm = ({ params }) => {
       .then((data) => {
         setData(data);
         setLoading(false);
-      })
+      });
+    setItems(data?.items);
+    setTotal(items.map(item => Number(item.price) * Number(item.quantity)).reduce((partial, accum) => partial + accum, 0));
   }, []);
-  const titleRef = useRef('');
-  const creatDateRef = useRef('');
-  const statusRef = useRef('');
-  const [items, setItems] = useState(data?.items ?? []);
-  const [total, setTotal] = useState(data?.totalPrice ?? '');
 
+  useEffect(() => {
+    setItems(data?.items);
+  }, [data]);
+
+  useEffect(() => {
+    setTotal(items?.map(item => Number(item.price) * Number(item.quantity)).reduce((partial, accum) => partial + accum, 0));
+  }, [items]);
+
+  const removeItem = (title) => {
+    const copy = [...items];
+    setItems(copy.filter(item => item.title !== title));
+  };
 
 
   if (isLoading) return <p>Loading...</p>
   if (!data) return <p>No data</p>
 
-  const removeItem = (title) => {
-    const copy = items.filter(item => item.title !== title);
-    setItems([...copy]);
-    setTotal(items.reduce((partial, accu) => partial + accu, 0));
-  };
+
   return (
-    <article>
-      <form>
-        <fieldset>
-          <legend>Edit the list {data.title}</legend>
-          <div>Title: <input ref={titleRef} defaultValue={data.title} /></div>
-          <div>Created date: <input ref={creatDateRef} defaultValue={data.createdDate} /></div>
-          <div>Total price: {total}</div>
-          <input ref={statusRef} defaultValue={data.completed ? 'completed' : 'not completed'} />
-          {items.map(item => <li key={item.title}>
-            Title: {item.title}
-            Quantity: {item.quantity}
-            Price: {item.price}
-            <button onClick={(e) => { e.stopPropagation(); removeItem(item.title) }}>Remove</button>
-          </li>)}
-          <button>Add Item</button>
-        </fieldset>
-      </form>
+    <article className="editform-container">
+      <EditForm data={data} titleRef={titleRef} total={total} items={items} removeItem={removeItem} setItems={setItems} />
     </article>
   )
 }
 
-export default EditForm;
+export default EditFormPage;

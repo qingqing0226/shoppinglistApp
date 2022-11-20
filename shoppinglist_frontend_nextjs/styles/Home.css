@@ -1,29 +1,9 @@
-* {
-  background-color:#FAEBE0;
-}
-
-.card {
+.home {
   width: 90vw;
 }
 
-.links-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.links {
-  background-color: #C9E4C5;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  border-radius: 10px;
-}
-
-.links:hover {
-  box-shadow: 0 0 10px rgba(32,32,32,.2);
-}
-
 .detail-container {
+  width: 90vw;
   font-size: 1.5rem;
   display: flex;
   flex-direction: column;
