@@ -54,11 +54,14 @@ On the third page - **View All**, you can check the shopping history.
 ---
 
 ## Getting Started
-<p>start the server on IntelliJ</p>
-<p>run the following command to install required modules</p>
-<code>npm install</code>
-<p>run the following command to start the frontend</p>
-<code>npm run dev</code>
+<p>Start the server on IntelliJ. When you see 'accepting traffic' in the terminal, the server is ready.</p>
+<p>Open frontend on vs code, run the following command to install required modules</p>
+<code>npm install</code><br /><br />
+<p>Run the following command to start the frontend</p>
+<code>npm run dev</code><br /><br />
+<p>Open your browser and type:</p>
+<code>http://localhost:3000</code><br /><br />
+<p>Now you are all set!</p>
 
 ---
 
@@ -72,9 +75,9 @@ On the third page - **View All**, you can check the shopping history.
 
 ## Acknowledgments
 
-Tools that helped me build this project:
+Tool that helped me build this project:
 
-* [Postman](https://postman.com/)
+* [![Postman][Postman]][postman-url]
 
 <!-- VARIABLES, KIND OF -->
 
@@ -94,6 +97,10 @@ Tools that helped me build this project:
 
 [Java-url]: https://www.java.com/en/
 
-[MongoDB]: https://img.shields.io/badge/mongodb?style=for-the-badge&logo=mongodb&logoColor=white
+[MongoDB]: https://img.shields.io/badge/mongoDB-white?logo=mongodb
 
 [MongoDB-url]: https://www.mongodb.com/
+
+[Postman]: https://img.shields.io/badge/Postman-white?logo=postman&logoHeight=50
+
+[postman-url]: https://postman.com/
