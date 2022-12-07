@@ -7,6 +7,7 @@ const EditForm = ({ data, titleRef, total, items, removeItem, setItems }) => {
   const itemTitle = useRef('');
   const itemQuan = useRef('');
   const itemPrice = useRef('');
+  const [updated, setUpdated] = useState(false);
 
   const addItem = () => {
     const copy = [...items];
@@ -17,7 +18,7 @@ const EditForm = ({ data, titleRef, total, items, removeItem, setItems }) => {
     itemPrice.current.value = null;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (titleRef.current.value === '' || items.length === 0) return;
     const body = {
@@ -28,14 +29,16 @@ const EditForm = ({ data, titleRef, total, items, removeItem, setItems }) => {
       completed: data.completed,
       items: items
     };
-    fetch('http://localhost:8080/api/shoppinglists/edit' + data.id, {
+    await fetch('http://localhost:8080/api/shoppinglists/edit/' + data.id, {
       method: 'PUT',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body)
-    }).then(res => res.json());
+    });
+
+    setUpdated(true);
   };
 
   return (
@@ -65,6 +68,7 @@ const EditForm = ({ data, titleRef, total, items, removeItem, setItems }) => {
           <button className="button-submit button" type="submit" >Submit</button>
         )}
       </fieldset>
+      {updated && <p>Updated Successfully!</p>}
     </form>
   );
 }
