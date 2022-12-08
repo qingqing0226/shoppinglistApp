@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Home.css';
+import Link from 'next/link';
 
 const getData = async () => {
   const data = await fetch('http://localhost:8080/api/shoppinglists/latest');
@@ -13,6 +14,7 @@ const Home = async () => {
     <section className="home">
       <div className="detail-container">
         <div className="title detail">{latest.title.toUpperCase()}</div>
+        <Link href={'shoppinglists/' + latest.id + '/Edit'} className="edit detail">Edit</Link>
         <div className="date detail">Created at: {latest.createdDate}</div>
         <div className="totalPrice detail">Total Price: {latest.totalPrice} SEK</div>
         <div className="status detail">
