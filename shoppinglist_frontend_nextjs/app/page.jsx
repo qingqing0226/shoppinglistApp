@@ -17,7 +17,7 @@ const Home = async () => {
         <Link href={'shoppinglists/' + latest.id + '/Edit'} className="edit detail">Edit</Link>
         <div className="date detail">Created at: {latest.createdDate}</div>
         <div className="totalPrice detail">Total Price: {latest.totalPrice} SEK</div>
-        <div className="status detail">
+        <div className="detail">
           Status: {latest.completed ? 'completed' : 'pending'}
         </div>
         <details className="items detail">

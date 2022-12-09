@@ -14,12 +14,16 @@ const CreateForm = () => {
   const itemPrice = useRef('');
 
   const addItem = () => {
+    if(itemQuan.current.value.length === 0 || isNaN(itemQuan.current.value) || 
+      itemPrice.current.value === 0 || isNaN(itemPrice.current.value)) {return;}
+
     const copy = [...items];
     copy.push({ title: itemTitle.current.value, quantity: itemQuan.current.value, price: itemPrice.current.value });
     setItems(copy);
     itemTitle.current.value = null;
     itemQuan.current.value = null;
     itemPrice.current.value = null;
+    setAdd(false);
   }
 
   const removeItem = (title) => {
@@ -36,7 +40,7 @@ const CreateForm = () => {
     if (titleRef.current.value === '' || items.length === 0) return;
     const data = {
       title: titleRef.current.value,
-      createdDate: new Date().toLocaleDateString(),
+      createdDate: new Date().toLocaleDateString('sv'),
       totalPrice: total,
       completed: false,
       items: items
@@ -70,7 +74,7 @@ const CreateForm = () => {
               <input className="field" ref={itemTitle} placeholder="Enter item name" />
               <input className="field" ref={itemQuan} placeholder="Enter item quantity" />
               <input className="field" ref={itemPrice} placeholder="Enter item price" />
-              <button className="button-add button" type='button' onClick={(e) => { e.stopPropagation(); addItem(); setAdd(false) }}>Add</button>
+              <button className="button-add button" type='button' onClick={(e) => { e.stopPropagation(); addItem(); }}>Add</button>
             </div>
           )}
           {(!add) && (

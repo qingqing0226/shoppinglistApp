@@ -22,7 +22,7 @@ const ShoppingList = async ({ params }) => {
         <div className="title detail">{shoppinglist.title.toUpperCase()}</div>
         <div className="date detail">Created at: {shoppinglist.createdDate}</div>
         <div className="totalPrice detail">Total Price: {shoppinglist.totalPrice} SEK</div>
-        <div className="status detail">
+        <div className="detail">
           Status: {shoppinglist.completed ? 'completed' : 'pending'}
         </div>
         <details className="items detail">
